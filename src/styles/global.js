@@ -17,9 +17,9 @@ export default createGlobalStyle`
     margin-bottom: 6px;
     padding-left: 10px;
     outline: none;
-  }
-  input::placeholder {
-    color: #DBDBDB;
-    font-size: 20px;
+    &::placeholder {
+      color: #DBDBDB;
+      font-size: 20px;
+    }
   }
 `;
