@@ -26,7 +26,7 @@ const Login = () => {
             setToken(res.data.token);
             history.push("/habitos")
             setIsLoading(false);
-        })
+        }).catch(() => setIsLoading(false));
     };
 
     return (
@@ -34,16 +34,16 @@ const Login = () => {
             <Logo />
                 <input
                     type="email"
-                    name="email"
                     onChange={onChangeInput}
                     value={values.email}
+                    name="email"
                     placeholder="email"
                 />
                 <input 
                     type="password"
-                    name="password"
                     onChange={onChangeInput}
                     value={values.password}
+                    name="password"
                     placeholder="senha"
                     minLength="6"
                 />
