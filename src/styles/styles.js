@@ -5,7 +5,8 @@ import { ReactComponent as LogoVector } from "../assets/trackit-logo.svg";
 const Logo = styled(LogoVector)`
     margin: 70px 0 23px 0;
 `;
-const ContainerLoginAndRegister = styled.div`
+
+const ContainerLoginAndRegister = styled.form`
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -20,17 +21,11 @@ const LinkLoginAndRegister = styled(Link)`
     margin-top: 25px;
 `;
 
-const Button = styled.button`
-    height: 45px;
-    background-color:#52B6FF;
-    color: white;
-    font-size: 21px;
-    border: none;
-    border-radius: 4.65px;
-`;
-
-const LargeButton = styled(Button)`
+const LargeButton = styled.button`
     width: 300px;
+    &:disabled {
+        opacity: 0.7;
+    }
 `;
 
 export {

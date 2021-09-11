@@ -8,18 +8,18 @@ const getConfig = (token) => ({
     }
 });
 
+const postLogin = (email, password) => (
+    axios.post(API_URL+"auth/login", {
+        email: email,
+        password: password,
+    })
+);
+
 const postRegister = (email, name, image, password) => (
     axios.post(API_URL+"auth/sign-up", {
         email: email,
         name: name,
         image: image,
-        password: password,
-    })
-);
-
-const postLogin = (email, password) => (
-    axios.post(API_URL+"auth/login", {
-        email: email,
         password: password,
     })
 );
