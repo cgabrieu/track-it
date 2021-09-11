@@ -10,11 +10,11 @@ import RoutesPrivate from "./components/routes/private/RoutesPrivate";
 import NotFound from "./pages/NotFound";
 
 function App() {
-	const [token, setToken] = useState(null);
+	const [user, setUser] = useState(null);
 	return (
 		<Router>
 			<GlobalStyle />
-			<UserContext.Provider value={{ token, setToken }}>
+			<UserContext.Provider value={{ user, setUser }}>
 				<Switch>
 					<Route component={Login} path="/" exact />
 					<Route component={Register} path="/cadastro" exact />

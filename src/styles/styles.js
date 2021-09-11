@@ -7,11 +7,11 @@ const Logo = styled(LogoVector)`
 `;
 
 const ContainerLoginAndRegister = styled.form`
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    background-color: #FFFFFF;
 `;
 
 const LinkLoginAndRegister = styled(Link)`

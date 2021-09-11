@@ -4,6 +4,7 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
   body {
     font-family: 'Lexend Deca', sans-serif;
+    background-color: #F2F2F2;
   }
   button {
     cursor: pointer;
@@ -29,8 +30,8 @@ export default createGlobalStyle`
       color: #DBDBDB;
       font-size: 20px;
     }
-    &:invalid {
-        border: 1.5px solid red;
+    &:invalid:not([value=""]) {
+      border: 1.5px solid red;
     }
   }
 `;

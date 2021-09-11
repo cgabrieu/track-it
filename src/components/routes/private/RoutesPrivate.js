@@ -3,11 +3,11 @@ import { Route, Redirect } from 'react-router-dom';
 import UserContext from "../../../contexts/UserContext";
 
 const RoutesPrivate = ({ component: Component, ...rest }) => {
-    const { token } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     return (
         <Route
             {...rest}
-            render={() => token
+            render={() => user.token
                 ? <Component {...rest} />
                 : <Redirect to="/" />
             }

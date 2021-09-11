@@ -1,10 +1,19 @@
-import { Logo, ContainerLoginAndRegister, LinkLoginAndRegister, LargeButton } from "../../../styles/styles";
+import React, { useContext } from 'react';
+import UserContext from "../../../contexts/UserContext";
+import Topbar from '../../Topbar';
+import Bottombar from '../../Bottombar';
 
-const Register = () => (
-    <ContainerLoginAndRegister>
-        <Logo />
-        <h1>TESTANDO FML</h1>
-    </ContainerLoginAndRegister>
-);
+const Habits = () => {
+    const { user } = useContext(UserContext);
 
-export default Register;
+    return (
+        <>
+            <Topbar image={user.image}/>
+            <Bottombar />
+        </>
+    );
+};
+
+
+
+export default Habits;

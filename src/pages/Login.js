@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 const Login = () => {
     const [values, setValues] = useState({email: '', password:''});
     const [isLoading, setIsLoading] = useState(false);
-    const { setToken } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
 
     const history = useHistory();
 
@@ -23,7 +23,8 @@ const Login = () => {
         e.preventDefault();
         setIsLoading(true);
         postLogin(values.email, values.password).then(res => {
-            setToken(res.data.token);
+            setUser(res.data);
+            console.log(res.data);
             history.push("/habitos")
             setIsLoading(false);
         }).catch(() => setIsLoading(false));
@@ -38,6 +39,7 @@ const Login = () => {
                     value={values.email}
                     name="email"
                     placeholder="email"
+                    required
                 />
                 <input 
                     type="password"
@@ -46,6 +48,7 @@ const Login = () => {
                     name="password"
                     placeholder="senha"
                     minLength="6"
+                    required
                 />
                 {isLoading ?
                     <LargeButton disabled>

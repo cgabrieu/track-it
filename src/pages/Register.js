@@ -27,8 +27,7 @@ const Register = () => {
         setIsLoading(true);
         const { email, password, name, picture } = values;
         postRegister(email, name, picture, password).then(res => {
-            history.push("/")
-            console.log(res.data)
+            history.push("/");
             setIsLoading(false);
         }).catch(() => setIsLoading(false));
     };
@@ -36,47 +35,47 @@ const Register = () => {
     return (
         <ContainerLoginAndRegister onSubmit={onSubmitLogin}>
             <Logo />
-                <input
-                    type="email"
-                    onChange={onChangeInput}
-                    value={values.email}
-                    name="email"
-                    placeholder="email"
-                    required
-                />
-                <input 
-                    type="password"
-                    onChange={onChangeInput}
-                    value={values.password}
-                    name="password"
-                    placeholder="senha"
-                    minLength="6"
-                    required
-                />
-                <input 
-                    type="text"
-                    onChange={onChangeInput}
-                    value={values.name}
-                    name="name"
-                    placeholder="nome"
-                    minLength="3"
-                    required
-                />
-                <input 
-                    type="url"
-                    onChange={onChangeInput}
-                    value={values.picture}
-                    name="picture"
-                    placeholder="foto"
-                    required
-                />
-                {isLoading ?
-                    <LargeButton disabled>
-                        <Loader type="ThreeDots" color="#FFFFFF" height={15} width={80} />
-                    </LargeButton>
-                    : <LargeButton type="submit">Cadastrar</LargeButton>
-                }
-            <LinkLoginAndRegister to="/login">Já tem uma conta? Faça login!</LinkLoginAndRegister>
+            <input
+                type="email"
+                onChange={onChangeInput}
+                value={values.email}
+                name="email"
+                placeholder="email"
+                required
+            />
+            <input 
+                type="password"
+                onChange={onChangeInput}
+                value={values.password}
+                name="password"
+                placeholder="senha"
+                minLength="6"
+                required
+            />
+            <input 
+                type="text"
+                onChange={onChangeInput}
+                value={values.name}
+                name="name"
+                placeholder="nome"
+                minLength="3"
+                required
+            />
+            <input 
+                type="url"
+                onChange={onChangeInput}
+                value={values.picture}
+                name="picture"
+                placeholder="foto"
+                required
+            />
+            {isLoading ?
+                <LargeButton disabled>
+                    <Loader type="ThreeDots" color="#FFFFFF" height={15} width={80} />
+                </LargeButton>
+                : <LargeButton type="submit">Cadastrar</LargeButton>
+            }
+            <LinkLoginAndRegister to="/">Já tem uma conta? Faça login!</LinkLoginAndRegister>
         </ContainerLoginAndRegister>
     );
 };
