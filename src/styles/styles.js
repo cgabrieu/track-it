@@ -6,12 +6,18 @@ const Logo = styled(LogoVector)`
     margin: 70px 0 23px 0;
 `;
 
-const ContainerLoginAndRegister = styled.form`
+const Container = styled.div`
+    padding: 0 18px;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FFFFFF;
+    background-color:${({ color }) => color || "#FFFFFF"};
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 
 const LinkLoginAndRegister = styled(Link)`
@@ -28,9 +34,50 @@ const LargeButton = styled.button`
     }
 `;
 
+const CheckboxesForm = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: left;
+    
+    input {
+        display: none;
+    }
+
+    label {
+        margin-right: 4px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        border: 1px solid #D5D5D5;
+        color: #DBDBDB;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    label[name="checked"] {
+        background:#CFCFCF;
+        color: #fff;
+    } 
+    
+    #domingo:checked ~ label[for="domingo"],
+    #segunda:checked ~ label[for="segunda"],
+    #terca:checked ~ label[for="terca"],
+    #quarta:checked ~ label[for="quarta"],
+    #quinta:checked ~ label[for="quinta"],
+    #sexta:checked ~ label[for="sexta"],
+    #sabado:checked ~ label[for="sabado"] {
+        background:#CFCFCF;;
+        color: #fff;
+    }
+`;
+
 export {
-    ContainerLoginAndRegister,
+    Container,
     LargeButton,
     Logo,
     LinkLoginAndRegister,
+    CheckboxesForm,
 }

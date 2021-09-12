@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../contexts/UserContext';
 import Loader from "react-loader-spinner";
-import { Logo, ContainerLoginAndRegister, LinkLoginAndRegister, LargeButton } from "../styles/styles";
+import { Logo, Container, LinkLoginAndRegister, LargeButton } from "../styles/styles";
 import { postLogin } from '../service/trackit';
 import { useHistory } from 'react-router';
 
 const Login = () => {
-    const [values, setValues] = useState({email: '', password:''});
+    const [values, setValues] = useState({ email: '', password: '' });
     const [isLoading, setIsLoading] = useState(false);
     const { setUser } = useContext(UserContext);
 
@@ -25,14 +25,15 @@ const Login = () => {
         postLogin(values.email, values.password).then(res => {
             setUser(res.data);
             console.log(res.data);
-            history.push("/habitos")
+            history.push("/habitos");
             setIsLoading(false);
         }).catch(() => setIsLoading(false));
     };
 
     return (
-        <ContainerLoginAndRegister onSubmit={onSubmitLogin}>
+        <Container>
             <Logo />
+            <form onSubmit={onSubmitLogin}>
                 <input
                     type="email"
                     onChange={onChangeInput}
@@ -41,7 +42,7 @@ const Login = () => {
                     placeholder="email"
                     required
                 />
-                <input 
+                <input
                     type="password"
                     onChange={onChangeInput}
                     value={values.password}
@@ -56,8 +57,9 @@ const Login = () => {
                     </LargeButton>
                     : <LargeButton type="submit">Entrar</LargeButton>
                 }
+            </form>
             <LinkLoginAndRegister to="/cadastro">Não tem uma conta? Cadastre-se!</LinkLoginAndRegister>
-        </ContainerLoginAndRegister>
+        </Container>
     );
 };
 

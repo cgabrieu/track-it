@@ -7,7 +7,7 @@ const RoutesPrivate = ({ component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
-            render={() => user.token
+            render={() => user
                 ? <Component {...rest} />
                 : <Redirect to="/" />
             }
