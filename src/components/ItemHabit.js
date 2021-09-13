@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useContext } from 'react';
-import { CheckboxesForm } from '../styles/styles'
+import { CheckboxesFormStyle } from '../styles/styles'
 import {ReactComponent as TrashIcon} from '../assets/trash.svg';
 import { deleteHabit } from '../service/trackit';
 import UserContext from "../contexts/UserContext";
@@ -12,19 +12,21 @@ function ItemHabit({ id, name, days, setSuccess }) {
     const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
     const handleDeleteHabit = () => {
-        deleteHabit(id, user.token)
-            .then(() => setSuccess(true))
-            .catch(() => alert("Ocorreu um erro ao apagar o hábito."))
+
+        if(window.confirm("Deseja mesmo apagar este hábito?")) 
+            deleteHabit(id, user.token)
+                .then(() => setSuccess(true))
+                .catch(() => alert("Ocorreu um erro ao apagar o hábito."));
     }
 
     return (
         <ContainerHabit>
             <h1>{name}</h1>
-            <CheckboxesForm>
-                {weekdays.map((e, index) => days.includes(index)
-                    ? <label key={index} name="checked">{e}</label>
-                    : <label key={index} name="unchecked">{e}</label>)}
-            </CheckboxesForm>
+            <CheckboxesFormStyle>
+                {weekdays.map((e, index) => 
+                    <li key={index} state={days.includes(index) ? "checked" : "unchecked"}>{e}</li>
+                )}
+            </CheckboxesFormStyle>
             <Trash onClick={handleDeleteHabit}/>
         </ContainerHabit>
     );
@@ -49,6 +51,7 @@ const Trash = styled(TrashIcon)`
     position: absolute;
     right: 10px;
     top: 10px;
+    cursor: pointer;
 `
 
 export default ItemHabit;

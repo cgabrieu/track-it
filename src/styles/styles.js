@@ -7,12 +7,12 @@ const Logo = styled(LogoVector)`
 `;
 
 const Container = styled.div`
-    padding: 0 18px;
-    height: 100vh;
+    padding: 0 18px 80px 18px;
+    ${props => `min-height: calc(100vh - ${props.bottom});`}
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color:${({ color }) => color || "#FFFFFF"};
+    background-color: ${({ color }) => color || "#FFFFFF"};
     form {
         display: flex;
         flex-direction: column;
@@ -20,30 +20,33 @@ const Container = styled.div`
     }
 `;
 
-const LinkLoginAndRegister = styled(Link)`
-    font-size: 14px;
+const LinkBase = styled(Link)`
     color:#52B6FF;
+`;
+
+const LinkLoginAndRegister = styled(LinkBase)`
+    font-size: 14px;
     text-decoration-line: underline;
     margin-top: 25px;
 `;
 
-const LargeButton = styled.button`
-    width: 300px;
-    &:disabled {
-        opacity: 0.7;
-    }
+const LinkBottombar = styled(LinkBase)`
+    font-size: 18px;
+    color: "#52B6FF"
 `;
 
-const CheckboxesForm = styled.div`
+const LargeButton = styled.button`
+    width: 300px;
+`;
+
+const CheckboxesFormStyle = styled.div`
     display: flex;
     width: 100%;
     justify-content: left;
-    
     input {
         display: none;
     }
-
-    label {
+    li {
         margin-right: 4px;
         width: 30px;
         height: 30px;
@@ -56,20 +59,8 @@ const CheckboxesForm = styled.div`
         font-size: 20px;
         cursor: pointer;
     }
-
-    label[name="checked"] {
+    li[state="checked"] {
         background:#CFCFCF;
-        color: #fff;
-    } 
-    
-    #domingo:checked ~ label[for="domingo"],
-    #segunda:checked ~ label[for="segunda"],
-    #terca:checked ~ label[for="terca"],
-    #quarta:checked ~ label[for="quarta"],
-    #quinta:checked ~ label[for="quinta"],
-    #sexta:checked ~ label[for="sexta"],
-    #sabado:checked ~ label[for="sabado"] {
-        background:#CFCFCF;;
         color: #fff;
     }
 `;
@@ -79,5 +70,6 @@ export {
     LargeButton,
     Logo,
     LinkLoginAndRegister,
-    CheckboxesForm,
+    CheckboxesFormStyle,
+    LinkBottombar,
 }

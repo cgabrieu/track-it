@@ -6,9 +6,8 @@ import UserContext from "../../../contexts/UserContext";
 import Topbar from '../../Topbar';
 import Bottombar from '../../Bottombar';
 import FormAddHabit from '../../FormAddHabit'
-import ItemHabit from '../../ItemHabit';
 
-const Habits = () => {
+const Today = () => {
     const { user } = useContext(UserContext);
     const [showHabitForm, setShowHabitForm] = useState(false);
     const [listHabits, setListHabits] = useState([]);
@@ -16,8 +15,8 @@ const Habits = () => {
     
     useEffect(() => {
         getListHabits(user.token)
-            .then((e) => setListHabits(e.data))
-            .catch(() => alert("Erro ao obter lista de hábitos."));
+            .then((e) => console.log(e.data))
+            .catch(() => alert("Erro"));
         setSuccess(false);
     }, [isSuccess]);
 
@@ -51,32 +50,5 @@ const Habits = () => {
     );
 };
 
-const ContainerAddMyHabits = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 100px;
-    height: 40px;
-    h1 {
-        font-size: 23px;
-        color:#126BA5;
-    }
-    button {
-        font-size: 27px;
-        height: 35px;
-        width: 40px;
-    }
-`;
 
-const ContainerHabits = styled(Container)`
-    height: 
-`
-
-const TextNoHabits = styled.p`
-    font-size: 18px;
-    color:#666666;
-    margin-top: 25px;
-`;
-
-export default Habits;
+export default Today;

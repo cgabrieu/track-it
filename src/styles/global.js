@@ -14,6 +14,9 @@ export default createGlobalStyle`
     font-size: 21px;
     border: none;
     border-radius: 4.65px;
+    &:disabled {
+      opacity: 0.7;
+    }
   }
   input {
     width: 300px;
@@ -32,6 +35,9 @@ export default createGlobalStyle`
     }
     &:invalid:not([value=""]) {
       border: 1.5px solid red;
+    }
+    &:disabled {
+      background-color: #F2F2F2;
     }
   }
 `;

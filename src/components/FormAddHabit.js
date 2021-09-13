@@ -1,27 +1,38 @@
 import styled from 'styled-components';
 import { postMakeHabit } from '../service/trackit';
-import React, { useState } from 'react';
-import { CheckboxesForm } from '../styles/styles'
+import React, { useState, useContext } from 'react';
+import CheckboxesForm from './CheckboxesForm';
+import Loader from "react-loader-spinner";
+import NewHabitContext from '../contexts/NewHabitContext';
 
 function FormAddHabit({ user, setShowHabitForm, setSuccess }) {
 
-    const [habitName, setHabitName] = useState("");
-    const [listDays, setListDays] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const { newHabit, setNewHabit } = useContext(NewHabitContext);
 
     const handleCheckboxChange = (e) => {
-        if (listDays.includes(e.target.value)) {
-            setListDays(listDays.filter((day) => day !== e.target.value));
+        const { value } = e.target;
+
+        if(newHabit.listDays.includes(value)){
+            const newListDays = newHabit.listDays.filter((t) => t !== value);
+            setNewHabit({...newHabit, listDays: newListDays});
             return;
         }
-        setListDays([...listDays, e.target.value]);
+        setNewHabit({
+            ...newHabit, 
+            listDays: [...newHabit.listDays, value]
+        });
     }
-
+    
     const makeHabit = (e) => {
         e.preventDefault();
-        if(listDays.length > 0) postMakeHabit(habitName, listDays, user.token)
+        setIsLoading(true);
+        postMakeHabit(newHabit.habitName, newHabit.listDays, user.token)
             .then(() => {
+                setNewHabit({habitName: "", listDays: []})
                 setShowHabitForm(false);
                 setSuccess(true);
+                setIsLoading(false);
             })
             .catch(() => alert("Ocorreu um erro ao criar o hábito."));
     }
@@ -32,29 +43,22 @@ function FormAddHabit({ user, setShowHabitForm, setSuccess }) {
                 placeholder="nome do hábito"
                 type="text"
                 maxLength="35"
-                value={habitName}
-                onChange={(e) => setHabitName(e.target.value)}
+                disabled={isLoading}
+                value={newHabit.habitName}
+                onChange={(e) => 
+                    setNewHabit({...newHabit, habitName: e.target.value}
+                )}
                 required
             />
-            <CheckboxesForm>
-                <input type="checkbox" onChange={handleCheckboxChange} value="0" id="domingo" />
-                <input type="checkbox" onChange={handleCheckboxChange} value="1" id="segunda" />
-                <input type="checkbox" onChange={handleCheckboxChange} value="2" id="terca" />
-                <input type="checkbox" onChange={handleCheckboxChange} value="3" id="quarta" />
-                <input type="checkbox" onChange={handleCheckboxChange} value="4" id="quinta" />
-                <input type="checkbox" onChange={handleCheckboxChange} value="5" id="sexta" />
-                <input type="checkbox" onChange={handleCheckboxChange} value="6" id="sabado" />
-                <label htmlFor="domingo">D</label>
-                <label htmlFor="segunda">S</label>
-                <label htmlFor="terca">T</label>
-                <label htmlFor="quarta">Q</label>
-                <label htmlFor="quinta">Q</label>
-                <label htmlFor="sexta">S</label>
-                <label htmlFor="sabado">S</label>
-            </CheckboxesForm>
+            <CheckboxesForm handleCheckboxChange={handleCheckboxChange} listDays={newHabit.listDays} isLoading={isLoading} />
             <div className="buttons-form">
                 <CancelButton onClick={() => setShowHabitForm(false)}>Cancelar</CancelButton>
-                <ButtonsForm type="submit">Salvar</ButtonsForm>
+                {isLoading
+                    ? <ButtonsForm disabled>
+                        <Loader type="ThreeDots" color="#FFFFFF" height={10} width={45} />
+                    </ButtonsForm>
+                    : (<ButtonsForm type="submit" disabled={newHabit.listDays.length === 0}>Salvar</ButtonsForm>)
+                }
             </div>
         </Form>
     );

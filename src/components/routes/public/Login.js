@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import UserContext from '../contexts/UserContext';
+import UserContext from '../../../contexts/UserContext';
 import Loader from "react-loader-spinner";
-import { Logo, Container, LinkLoginAndRegister, LargeButton } from "../styles/styles";
-import { postLogin } from '../service/trackit';
+import { Logo, Container, LinkLoginAndRegister, LargeButton } from "../../../styles/styles";
+import { postLogin } from '../../../service/trackit';
 import { useHistory } from 'react-router';
 
 const Login = () => {
@@ -27,17 +27,21 @@ const Login = () => {
             console.log(res.data);
             history.push("/habitos");
             setIsLoading(false);
-        }).catch(() => setIsLoading(false));
+        }).catch(() => {
+            setIsLoading(false);
+            alert("Usuário e senha inválidos.")
+        });
     };
 
     return (
-        <Container>
+        <Container bottom="0px">
             <Logo />
             <form onSubmit={onSubmitLogin}>
                 <input
                     type="email"
                     onChange={onChangeInput}
                     value={values.email}
+                    disabled={isLoading}
                     name="email"
                     placeholder="email"
                     required
@@ -46,13 +50,14 @@ const Login = () => {
                     type="password"
                     onChange={onChangeInput}
                     value={values.password}
+                    disabled={isLoading}
                     name="password"
                     placeholder="senha"
                     minLength="6"
                     required
                 />
-                {isLoading ?
-                    <LargeButton disabled>
+                {isLoading
+                    ? <LargeButton disabled>
                         <Loader type="ThreeDots" color="#FFFFFF" height={15} width={80} />
                     </LargeButton>
                     : <LargeButton type="submit">Entrar</LargeButton>
