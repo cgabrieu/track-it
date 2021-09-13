@@ -44,11 +44,11 @@ const getTodayHabits = (token) => (
 );
 
 const postCheckHabit = (IDHabit, token) => (
-    axios.post(API_URL+"habits/"+IDHabit+"/check", getConfig(token))
+    axios.post(API_URL+"habits/"+IDHabit+"/check", "", getConfig(token))
 );
 
 const postUncheckHabit = (IDHabit, token) => (
-    axios.post(API_URL+"habits/"+IDHabit+"/uncheck", getConfig(token))
+    axios.post(API_URL+"habits/"+IDHabit+"/uncheck", "",getConfig(token))
 );
 
 const getHistoryDailyHabit = (token) => (

@@ -42,7 +42,7 @@ function FormAddHabit({ user, setShowHabitForm, setSuccess }) {
             <input
                 placeholder="nome do hábito"
                 type="text"
-                maxLength="35"
+                maxLength="30"
                 disabled={isLoading}
                 value={newHabit.habitName}
                 onChange={(e) => 

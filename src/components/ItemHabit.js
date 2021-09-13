@@ -34,10 +34,10 @@ function ItemHabit({ id, name, days, setSuccess }) {
 
 const ContainerHabit = styled.div`
     position: relative;
-    margin-top: 20px;
+    margin-top: 10px;
     background-color:#FFF;
     width: 340px;
-    height: 90px;
+    min-height: 90px;
     padding: 15px;
     border-radius: 5px;
     h1 {

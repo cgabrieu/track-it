@@ -1,11 +1,16 @@
 import styled from "styled-components"
+import React, { useContext } from 'react';
 import { ReactComponent as Logo } from "../assets/trackIt-small-logo.svg"
+import UserContext from "../contexts/UserContext";
 
-const Topbar = ({ image }) => {
+const Topbar = () => {
+
+    const { user } = useContext(UserContext);
+
     return (
         <TopbarStyle>
             <Logo />
-            <UserPic src={image} />
+            <UserPic src={user!== null && user.image} />
         </TopbarStyle>
     );
 

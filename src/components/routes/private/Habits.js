@@ -23,7 +23,6 @@ const Habits = () => {
 
     return (
         <>
-            <Topbar image={user.image} />
             <Container color="#E5E5E5" bottom="72px">
                 <ContainerAddMyHabits>
                     <h1>Meus hábitos</h1>
@@ -46,13 +45,12 @@ const Habits = () => {
                     />) 
                 : <TextNoHabits>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</TextNoHabits>}
             </Container>
-            <Bottombar />
         </>
     );
 };
 
 const ContainerAddMyHabits = styled.div`
-    width: 100%;
+    width: 340px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,10 +66,6 @@ const ContainerAddMyHabits = styled.div`
         width: 40px;
     }
 `;
-
-const ContainerHabits = styled(Container)`
-    height: 
-`
 
 const TextNoHabits = styled.p`
     font-size: 18px;

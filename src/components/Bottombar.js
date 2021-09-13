@@ -1,12 +1,13 @@
+import React, { useContext } from 'react';
 import { LinkBottombar } from "../styles/styles";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 import styled from "styled-components";
+import UserContext from "../contexts/UserContext";
+import 'react-circular-progressbar/dist/styles.css';
 
 
 const Bottombar = () => {
-
-    const percentage = 20;
+    const { progressDay } = useContext(UserContext);
 
     return (
         <FooterBarStyle>
@@ -14,7 +15,7 @@ const Bottombar = () => {
             <LinkBottombar to="/hoje">
                 <TodayProgressBar>
                     <CircularProgressbar
-                        value={percentage}
+                        value={progressDay}
                         text={"Hoje"}
                         background
                         backgroundPadding={6}
