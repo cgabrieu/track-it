@@ -1,41 +1,42 @@
 import styled from 'styled-components';
 import React, { useContext, useState, useEffect } from 'react';
 import { Container } from "../../../styles/styles";
-import { getTodayHabits, postCheckHabit, postUncheckHabit } from '../../../service/trackit';
+import { getHistoryDailyHabit } from '../../../service/trackit';
 import UserContext from "../../../contexts/UserContext";
+import Calendar from 'react-calendar';
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
+import 'react-calendar/dist/Calendar.css';
 
 const History = () => {
 
-    const day = dayjs().locale('pt-br');
-    const weekday = day.format('dddd');
-    const date = day.format('DD/MM')
+    const { user } = useContext(UserContext);
+    const [days, setDays] = useState([]);
 
     useEffect(() => {
-        getTodayHabits(user.token)
-            .then((e) => {
-                setListHabits(e.data);
-            })
-            .catch(() => alert("Erro ao obter lista de hábitos."));
-        setSuccess(false);
-    }, [success]);
-
+        getHistoryDailyHabit(user.token)
+            .then(e => setDays(e.data))
+            .catch(() => alert("Erro ao obter lista de dias."))
+    }, []);
 
     return (
         <Container color="#E5E5E5" bottom="72px">
-            <ContainerDate>
+            <ContainerCalendar>
                 <h1>
-                    
+                    Histórico
                 </h1>
-                <h2>{progressDay}% dos hábitos concluídos</h2>
-            </ContainerDate>
-            {listHabits.map((e) => <TodayHabitItem key={e.id} handleCheckHabit={handleCheckHabit} habit={e} />)}
+                <FormCalendar 
+                   minDate={new Date("8/29/2021")}
+                   maxDate={new Date()}
+                   calendarType={"US"}
+                   formatDay={(locale, date) => dayjs(date).format('DD')}
+                />
+            </ContainerCalendar>
         </Container>
     );
 };
 
-const ContainerDate = styled.div`
+const ContainerCalendar = styled.div`
     margin: 100px 0 18px 0;
     width: 340px;
     h1 {
@@ -48,5 +49,21 @@ const ContainerDate = styled.div`
         line-height: 26px;
     }
 `;
+
+const FormCalendar = styled(Calendar)`
+    margin-top: 12px;
+    height: 400px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FFF;
+    div {
+        margin-top: 5px; 
+    }
+    button {
+        color: black;
+        border-radius: 50%;
+        font-size: 14px;
+    }
+`
 
 export default History;

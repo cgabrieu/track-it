@@ -1,9 +1,6 @@
 import styled from 'styled-components';
-import React, { useEffect, useState } from 'react';
-import { CheckboxesFormStyle } from '../styles/styles'
+import React, { useState } from 'react';
 import {ReactComponent as CheckIcon} from '../assets/check.svg';
-import { deleteHabit } from '../service/trackit';
-import UserContext from "../contexts/UserContext";
 import Loader from "react-loader-spinner";
 
 function TodayHabitItem({ habit, handleCheckHabit }) {
@@ -69,6 +66,7 @@ const Checkbox = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.5s linear;
 `;
 
 const ContainerSequence = styled.div`

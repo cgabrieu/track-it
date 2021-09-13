@@ -14,7 +14,7 @@ const Topbar = () => {
         <TopbarStyle>
             <Logo />
             <UserPic 
-                src={user !== null && user.image}
+                src={user !== null ? user.image : ""}
                 onClick={() => {
                     localStorage.clear();
                     history.push("/");

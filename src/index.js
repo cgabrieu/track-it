@@ -7,6 +7,7 @@ import Register from "./components/routes/public/Register";
 import UserContext from './contexts/UserContext';
 import NewHabitContext from "./contexts/NewHabitContext";
 import Habits from "./components/routes/private/Habits"
+import History from "./components/routes/private/History";
 import RoutesPrivate from "./components/routes/private/RoutesPrivate";
 import NotFound from "./components/routes/public/NotFound";
 import Today from "./components/routes/private/Today";
@@ -32,6 +33,7 @@ function App() {
 						<Topbar />
 						<RoutesPrivate component={Habits} path="/habitos" exact />
 						<RoutesPrivate component={Today} path="/hoje" exact />
+						<RoutesPrivate component={History} path="/historico" exact />
 						<Bottombar />
 					</NewHabitContext.Provider>
 					<Route component={NotFound} />
