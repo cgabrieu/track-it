@@ -3,8 +3,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Container } from "../../../styles/styles";
 import { getListHabits } from '../../../service/trackit';
 import UserContext from "../../../contexts/UserContext";
-import Topbar from '../../Topbar';
-import Bottombar from '../../Bottombar';
 import FormAddHabit from '../../FormAddHabit'
 import ItemHabit from '../../ItemHabit';
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import UserContext from '../../../contexts/UserContext';
 import Loader from "react-loader-spinner";
 import { Logo, Container, LinkLoginAndRegister, LargeButton } from "../../../styles/styles";
@@ -11,6 +11,14 @@ const Login = () => {
     const { setUser } = useContext(UserContext);
 
     const history = useHistory();
+    
+    useEffect(() => {
+        const saved = localStorage.getItem("user");
+        if (saved !== null) {
+            setUser(JSON.parse(saved));
+            history.push("/habitos");
+        }
+      }, []);
 
     const onChangeInput = (e) => {
         setValues({
@@ -25,6 +33,7 @@ const Login = () => {
         postLogin(values.email, values.password).then(res => {
             setUser(res.data);
             console.log(res.data);
+            localStorage.setItem("user", JSON.stringify(res.data));
             history.push("/habitos");
             setIsLoading(false);
         }).catch(() => {

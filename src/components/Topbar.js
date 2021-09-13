@@ -1,16 +1,25 @@
 import styled from "styled-components"
 import React, { useContext } from 'react';
 import { ReactComponent as Logo } from "../assets/trackIt-small-logo.svg"
+import { useHistory } from 'react-router-dom';
 import UserContext from "../contexts/UserContext";
 
 const Topbar = () => {
 
     const { user } = useContext(UserContext);
 
+    const history = useHistory();
+
     return (
         <TopbarStyle>
             <Logo />
-            <UserPic src={user!== null && user.image} />
+            <UserPic 
+                src={user !== null && user.image}
+                onClick={() => {
+                    localStorage.clear();
+                    history.push("/");
+                }}
+            />
         </TopbarStyle>
     );
 
@@ -34,6 +43,7 @@ const UserPic = styled.img`
     height: 51px;
     object-fit: cover;
     border-radius: 50%;
+    cursor: pointer;
 `
 
 export default Topbar;
